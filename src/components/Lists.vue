@@ -22,7 +22,7 @@
             <p class="title">
               <input v-on:click="selectItem(child, item)" type="checkbox" class="checkbox" v-bind:checked="child.checked">
               <span>{{ child.title }}</span>
-              <input class="count" type="number" max="100" min="0" v-model="child.count" v-on:change="changeRandom(item, child)">
+              <input class="count" type="number" max="100" min="0" v-bind:value="child.count" v-on:change="changeRandom($event, item, child)">
               <input class="color-input" type="color" v-model="child.color" v-on:change="changeColor(item, child)">
             </p>
           </li>
@@ -89,10 +89,18 @@
           parent.indeterminate = false;
         }
       },
-      changeRandom(item, child) {
-        if (+child.count < 0) {
-          child.count = 0;
+      changeRandom(event, item, child) {
+        let newCount = event.target.value;
+
+        if (+newCount < 0) {
+          newCount = 0;
         }
+        if (+newCount > 99) {
+          newCount = 99;
+        }
+
+        child.count = newCount;
+
         if (child.checked) {
           this.$emit('change-random', item);
         }

@@ -188,7 +188,8 @@
 
         children.forEach(el => {
           if (Number(el.count)) {
-            resultArray.push(...`${el.color}/`.repeat(Number(el.count)).split('/'));
+            const y = `${el.color}/`.repeat(Number(el.count)).split('/');
+            resultArray.push(...y);
             resultArray.length = resultArray.length - 1;
           }
         });

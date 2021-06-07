@@ -67,7 +67,8 @@
 
         selectedChild.count -= 1;
 
-        if (index) {
+        
+        if (typeof index === 'number') {
           parent.randomColors.splice(index, 1);
         }
       }
